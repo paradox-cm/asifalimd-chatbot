@@ -6,7 +6,7 @@ import { Send, RefreshCw, Download, ArrowRight, Square } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import { useCustomChat } from "@/hooks/use-custom-chat"
+import { useChat } from "ai/react"
 
 // Create a simple typing indicator component
 function TypingIndicator() {
@@ -46,33 +46,39 @@ function SuggestedQuestions({ onSelectQuestion }: { onSelectQuestion: (question:
   )
 }
 
+// Function to clean content from any token debug output
+function cleanContent(content: string): string {
+  // Remove token debug patterns like 0:"Dr", 1:"." etc.
+  return content.replace(/^\d+:"[^"]*"\s?/gm, "")
+}
+
 export default function ChatInterface() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState<string | null>(null)
 
-  // Use our custom chat hook
-  const { messages, input, handleInputChange, handleSubmit, isLoading, stop, reload, setInput, streamedResponse } =
-    useCustomChat({
-      initialMessages: [
-        {
-          id: "welcome-message",
-          role: "assistant",
-          content: "Hello! I'm Dr. Ali's AI assistant. How can I help you today?",
-        },
-      ],
-      onError: (error) => {
-        console.error("Chat error:", error)
-        setError("An error occurred. Please try again.")
-        // Clear error after 5 seconds
-        setTimeout(() => setError(null), 5000)
+  // Use the useChat hook from the AI SDK
+  const { messages, input, handleInputChange, handleSubmit, isLoading, reload, stop, setInput } = useChat({
+    api: "/api/chat",
+    initialMessages: [
+      {
+        id: "welcome-message",
+        role: "assistant",
+        content: "Hello! I'm Dr. Ali's AI assistant. How can I help you today?",
       },
-    })
+    ],
+    onError: (error) => {
+      console.error("Chat error:", error)
+      setError("An error occurred. Please try again.")
+      // Clear error after 5 seconds
+      setTimeout(() => setError(null), 5000)
+    },
+  })
 
-  // Scroll to bottom when messages change or when streaming
+  // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [messages, streamedResponse, isLoading])
+  }, [messages, isLoading])
 
   // Focus input on mount
   useEffect(() => {
@@ -99,13 +105,16 @@ export default function ChatInterface() {
 
   // Process message content to handle links
   const processMessageContent = (content: string) => {
+    // First clean any token debug output
+    const cleanedContent = cleanContent(content)
+
     // Check if the message contains link markers
-    if (!content.includes("[LINK:")) {
-      return { text: content, links: [] }
+    if (!cleanedContent.includes("[LINK:")) {
+      return { text: cleanedContent, links: [] }
     }
 
     // Split the content into text and links
-    const parts = content.split(/(\[LINK:[^\]]+\])/)
+    const parts = cleanedContent.split(/(\[LINK:[^\]]+\])/)
     const processedContent = parts.filter((part) => !part.startsWith("[LINK:")).join("")
 
     // Extract links
@@ -113,7 +122,7 @@ export default function ChatInterface() {
     const links: { url: string; text: string }[] = []
     let match
 
-    while ((match = linkRegex.exec(content)) !== null) {
+    while ((match = linkRegex.exec(cleanedContent)) !== null) {
       links.push({
         url: match[1],
         text: match[2],
@@ -135,7 +144,9 @@ export default function ChatInterface() {
     const chatText = messages
       .map((msg) => {
         const role = msg.role === "user" ? "You" : "Dr. Ali's Assistant"
-        return `${role}:\n${msg.content}\n`
+        // Clean content before exporting
+        const cleanedContent = cleanContent(msg.content)
+        return `${role}:\n${cleanedContent}\n`
       })
       .join("\n")
 
@@ -158,7 +169,7 @@ export default function ChatInterface() {
         aria-label="Chat conversation with Dr. Ali's assistant"
       >
         {messages.map((message) => {
-          // Process message content to extract links
+          // Process message content to extract links and clean any token debug output
           const { text, links } = processMessageContent(message.content)
 
           return (
@@ -193,17 +204,8 @@ export default function ChatInterface() {
           )
         })}
 
-        {/* Streaming response */}
-        {isLoading && streamedResponse && (
-          <div className="flex justify-start">
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-[80%] md:max-w-[70%]" aria-live="polite">
-              <p className="whitespace-pre-wrap">{streamedResponse}</p>
-            </div>
-          </div>
-        )}
-
-        {/* Typing indicator (only show when loading but no streamed content yet) */}
-        {isLoading && !streamedResponse && (
+        {/* Typing indicator */}
+        {isLoading && (
           <div className="flex justify-start">
             <div
               className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-[80%] md:max-w-[70%]"
@@ -243,7 +245,7 @@ export default function ChatInterface() {
           />
           {isLoading ? (
             <Button
-              onClick={stop}
+              onClick={() => stop()}
               className="h-10 w-10 rounded-full flex items-center justify-center bg-transparent border border-foreground/30 hover:bg-foreground/5 text-foreground transition-colors"
               aria-label="Stop response"
               title="Stop response"
