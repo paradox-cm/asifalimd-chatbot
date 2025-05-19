@@ -1,3 +1,6 @@
+// Advanced intent classification system for Dr. Ali's chat interface
+
+// Define intent types
 export type IntentType =
   | "clinical"
   | "research"

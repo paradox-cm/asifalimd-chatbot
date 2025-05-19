@@ -1,3 +1,4 @@
+// Function to identify question type to provide more targeted responses
 export function identifyQuestionType(input: string): string {
   const text = input.toLowerCase()
 

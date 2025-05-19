@@ -1,15 +1,5 @@
-import * as dotenv from "dotenv"
-import path from "path"
-
-// Load .env.local file
-dotenv.config({ path: path.resolve(__dirname, "../.env.local") })
-
-console.log("✅ ENV CHECK:")
-console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY)
-console.log("SUPABASE_URL:", process.env.NEXT_PUBLIC_SUPABASE_URL)
-console.log("SERVICE_ROLE_KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY)
-
 import fs from "fs"
+import path from "path"
 import { createClient } from "@supabase/supabase-js"
 import type { Document } from "langchain/document"
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter"
@@ -52,6 +42,7 @@ async function processFile(filePath: string): Promise<Document[]> {
   try {
     let docs: Document[] = []
 
+    // Load document based on file type
     if (extension === ".pdf") {
       const loader = new PDFLoader(filePath)
       docs = await loader.load()
@@ -69,11 +60,13 @@ async function processFile(filePath: string): Promise<Document[]> {
       return []
     }
 
+    // Add metadata
     docs.forEach((doc) => {
       doc.metadata.source = path.basename(filePath)
       doc.metadata.type = extension.substring(1)
     })
 
+    // Split text into chunks
     return await textSplitter.splitDocuments(docs)
   } catch (error) {
     console.error(`Error processing file ${filePath}:`, error)
@@ -113,6 +106,7 @@ async function main() {
   try {
     const knowledgeDir = path.join(process.cwd(), "knowledge")
 
+    // Create knowledge directory if it doesn't exist
     if (!fs.existsSync(knowledgeDir)) {
       fs.mkdirSync(knowledgeDir, { recursive: true })
       console.log(`Created knowledge directory at ${knowledgeDir}`)
@@ -120,6 +114,7 @@ async function main() {
       return
     }
 
+    // Process all files
     const allDocs = await processDirectory(knowledgeDir)
     console.log(`Processed ${allDocs.length} document chunks`)
 
@@ -128,35 +123,14 @@ async function main() {
       return
     }
 
+    // Add documents to vector store
     console.log("Adding documents to vector store...")
-
-    const sanitizedDocs = allDocs.map(doc => {
-      const cleanContent = doc.pageContent
-        .replace(/[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD]/g, '') // Remove control characters
-        .replace(/\\u[\dA-F]{4}/gi, '') // Remove malformed unicode escapes
-
-      const flattenedMetadata: Record<string, any> = {
-        source: doc.metadata.source,
-        type: doc.metadata.type,
-      }
-
-      return {
-        pageContent: cleanContent,
-        metadata: flattenedMetadata,
-      }
-    })
-
-    try {
-      await vectorStore.addDocuments(sanitizedDocs)
-      console.log("✅ Documents successfully added to vector store!")
-    } catch (error) {
-      console.error("❌ Error during insertion:", error)
-      console.log("🧪 First problematic doc:", JSON.stringify(sanitizedDocs[0], null, 2))
-    }
+    await vectorStore.addDocuments(allDocs)
+    console.log("Documents successfully added to vector store!")
   } catch (error) {
-    console.error("❌ Error in main process:", error)
+    console.error("Error in main process:", error)
   }
 }
 
-// Run main
+// Run the main function
 main()

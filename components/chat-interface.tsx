@@ -1,15 +1,14 @@
 "use client"
 
 import type React from "react"
-
-import { useRef, useEffect } from "react"
-import { useChat } from "ai/react"
+import { useState, useRef, useEffect } from "react"
 import { Send, RefreshCw, Download, ArrowRight, Square } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { useCustomChat } from "@/hooks/use-custom-chat"
 
-// Create a simple typing indicator component since we're having import issues
+// Create a simple typing indicator component
 function TypingIndicator() {
   return (
     <div className="flex space-x-1">
@@ -50,23 +49,30 @@ function SuggestedQuestions({ onSelectQuestion }: { onSelectQuestion: (question:
 export default function ChatInterface() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [error, setError] = useState<string | null>(null)
 
-  // Use the useChat hook from the AI SDK
-  const { messages, input, handleInputChange, handleSubmit, isLoading, reload, stop, setInput } = useChat({
-    api: "/api/chat",
-    initialMessages: [
-      {
-        id: "welcome-message",
-        role: "assistant",
-        content: "Hello! I'm Dr. Ali's AI assistant. How can I help you today?",
+  // Use our custom chat hook
+  const { messages, input, handleInputChange, handleSubmit, isLoading, stop, reload, setInput, streamedResponse } =
+    useCustomChat({
+      initialMessages: [
+        {
+          id: "welcome-message",
+          role: "assistant",
+          content: "Hello! I'm Dr. Ali's AI assistant. How can I help you today?",
+        },
+      ],
+      onError: (error) => {
+        console.error("Chat error:", error)
+        setError("An error occurred. Please try again.")
+        // Clear error after 5 seconds
+        setTimeout(() => setError(null), 5000)
       },
-    ],
-  })
+    })
 
-  // Scroll to bottom when messages change
+  // Scroll to bottom when messages change or when streaming
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [messages, isLoading])
+  }, [messages, streamedResponse, isLoading])
 
   // Focus input on mount
   useEffect(() => {
@@ -187,14 +193,32 @@ export default function ChatInterface() {
           )
         })}
 
-        {/* Typing indicator */}
-        {isLoading && (
+        {/* Streaming response */}
+        {isLoading && streamedResponse && (
+          <div className="flex justify-start">
+            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-[80%] md:max-w-[70%]" aria-live="polite">
+              <p className="whitespace-pre-wrap">{streamedResponse}</p>
+            </div>
+          </div>
+        )}
+
+        {/* Typing indicator (only show when loading but no streamed content yet) */}
+        {isLoading && !streamedResponse && (
           <div className="flex justify-start">
             <div
               className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-[80%] md:max-w-[70%]"
               aria-label="Dr. Ali's assistant is typing"
             >
               <TypingIndicator />
+            </div>
+          </div>
+        )}
+
+        {/* Error message */}
+        {error && (
+          <div className="flex justify-center">
+            <div className="bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 rounded-lg p-3 max-w-[80%] md:max-w-[70%]">
+              <p>{error}</p>
             </div>
           </div>
         )}
@@ -219,7 +243,7 @@ export default function ChatInterface() {
           />
           {isLoading ? (
             <Button
-              onClick={() => stop()}
+              onClick={stop}
               className="h-10 w-10 rounded-full flex items-center justify-center bg-transparent border border-foreground/30 hover:bg-foreground/5 text-foreground transition-colors"
               aria-label="Stop response"
               title="Stop response"

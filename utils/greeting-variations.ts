@@ -1,3 +1,4 @@
+// Array of greeting variations for the chat interface
 const greetingVariations = [
   "Hello! I'm Dr. Ali's virtual assistant. How may I help today?",
   "Welcome! I'm here to provide information about Dr. Asif Ali. How may I help today?",

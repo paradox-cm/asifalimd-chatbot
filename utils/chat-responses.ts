@@ -1,3 +1,6 @@
+// Chat responses for Dr. Ali's website
+// This file contains predefined responses for common questions
+
 import { identifyQuestionCategory, getRelevantInformation } from "./knowledge-base"
 
 // Function to generate a response based on the user's question

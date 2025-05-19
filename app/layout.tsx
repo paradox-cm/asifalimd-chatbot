@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     title: "Asif Ali, MD | Cardiologist & Med-Tech Advisor",
     description: "Cardiologist, Clinical Strategist, and Med-Tech Advisor bridging science and care.",
   },
+    generator: 'v0.dev'
 }
 
 export const viewport: Viewport = {

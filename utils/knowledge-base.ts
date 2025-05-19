@@ -1,3 +1,6 @@
+// Knowledge base for Dr. Ali's website
+// This file contains structured information about Dr. Ali that can be used by the AI engine
+
 export const knowledgeBase = {
   general: {
     name: "Dr. Asif Ali",

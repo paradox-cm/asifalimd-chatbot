@@ -1,3 +1,4 @@
+// Import the new personal questions utility
 import { identifyPersonalQuestion, getPersonalQuestionResponse } from "./personal-questions-utils"
 
 export type MessageRole = "user" | "assistant" | "system"
