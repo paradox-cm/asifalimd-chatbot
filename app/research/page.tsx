@@ -1,4 +1,4 @@
-import { Brain, Activity, Watch, Heart, Users, Dumbbell, Globe, Microscope } from "lucide-react"
+import { Brain, Activity, Watch, Heart, Users, Dumbbell, Globe, Microscope, ExternalLink } from "lucide-react"
 import FadeInSection from "@/components/fade-in-section"
 import CollapsiblePublications from "@/components/collapsible-publications"
 import CollapsibleSection from "@/components/collapsible-section"
@@ -101,6 +101,37 @@ export default function ResearchPage() {
               <h3 className="text-lg font-semibold text-foreground">Public Health and Health Equity</h3>
             </div>
           </div>
+        </div>
+
+        {/* ORCID Link - Full Width Callout */}
+        <div className="mt-10 w-full">
+          <a
+            href="https://orcid.org/0000-0002-7368-9983"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center w-full px-6 py-4 bg-gradient-to-r from-clinical-50 to-clinical-100 dark:from-clinical-900/30 dark:to-clinical-800/30 border-2 border-clinical-200 dark:border-clinical-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 hover:border-clinical-300 dark:hover:border-clinical-600 active:scale-[0.99]"
+            aria-label="View Dr. Ali's ORCID profile"
+          >
+            {/* ORCID Logo */}
+            <div className="flex-shrink-0 w-10 h-10 bg-[#A6CE39] rounded-full flex items-center justify-center text-white font-bold text-xs">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" className="w-8 h-8">
+                <path fill="#fff" d="M128 256c70.7 0 128-57.3 128-128S198.7 0 128 0 0 57.3 0 128s57.3 128 128 128z" />
+                <path
+                  fill="#A6CE39"
+                  d="M86.3 186.2H70.9V79.1h15.4v107.1zm22.6-107.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4zM85.3 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1z"
+                />
+              </svg>
+            </div>
+
+            <div className="flex flex-col ml-3">
+              <span className="text-lg font-semibold text-clinical-700 dark:text-clinical-300 group-hover:text-clinical-800 dark:group-hover:text-clinical-200 transition-colors">
+                View Dr. Ali's Research Profile
+              </span>
+              <span className="text-sm text-clinical-600/80 dark:text-clinical-400/80">ORCID: 0000-0002-7368-9983</span>
+            </div>
+
+            <ExternalLink className="h-5 w-5 text-clinical-500 dark:text-clinical-400 group-hover:text-clinical-700 dark:group-hover:text-clinical-300 ml-auto transition-colors" />
+          </a>
         </div>
       </CollapsibleSection>
 

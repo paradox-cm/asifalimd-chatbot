@@ -321,7 +321,7 @@ export default function ContactPage() {
                 <h2 className="text-xl font-bold mb-4 text-foreground">Connect Online</h2>
                 <div className="space-y-4">
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/asif-ali-md/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-foreground/70 hover:text-clinical-600 transition-colors duration-300"

@@ -139,6 +139,7 @@
     "d3-dsv": "latest",
     "date-fns": "4.1.0",
     "discord.js": "latest",
+    "dotenv": "latest",
     "dria": "latest",
     "duck-duck-scrape": "latest",
     "embla-carousel-react": "8.5.1",

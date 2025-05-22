@@ -49,7 +49,7 @@ export function Footer() {
 
             <div className="grid grid-cols-1 gap-3">
               <Link
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/asif-ali-md/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-md border border-border bg-background hover:bg-clinical-50 dark:hover:bg-clinical-900/20 text-foreground/80 hover:text-clinical-600 transition-colors duration-300"
