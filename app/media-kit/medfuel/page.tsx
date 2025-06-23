@@ -41,7 +41,7 @@ const DROPBOX_PDF_URL =
 const GOOGLE_DOCS_URL =
   "https://docs.google.com/document/d/1Bt52r3XxWOJ4wZ2J-Tm3iv8zUxWxiB44I3I3B6FA2XU/edit?usp=sharing"
 
-export default function MediaKitPage() {
+export default function MedfuelMediaKitPage() {
   const [isImageOpen, setIsImageOpen] = useState(false)
 
   const bioContent = (
@@ -183,6 +183,17 @@ export default function MediaKitPage() {
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-6 pt-0">
                 <div className="mb-6 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center sm:justify-center gap-4 sm:gap-6 md:gap-8">
+                  {/* Medfuel Logo */}
+                  <div className="relative h-10 w-36 sm:h-12 sm:w-44">
+                    <Image
+                      src="/images/logos/medfuel-logo.png"
+                      alt="Medfuel Logo"
+                      layout="fill"
+                      objectFit="contain"
+                      className="dark:brightness-0 dark:invert"
+                    />
+                  </div>
+
                   {/* Houston Cardiology Consultants Logo */}
                   <div className="relative h-12 w-32 sm:h-16 sm:w-40">
                     <Image
@@ -207,14 +218,14 @@ export default function MediaKitPage() {
                   </div>
                 </div>
                 <p>
-                  Thank you for your interest in my work and expertise. This media kit contains my professional profile,
-                  perspective quotes, and biography to support speaking engagements, media interviews, and collaborative
-                  opportunities. I'm honored to share insights on the intersection of clinical medicine, digital health
-                  innovation, and patient-centered care.
+                  Thank you for the opportunity to participate in Medfuel 2025. This media folder contains my official
+                  speaker profile, perspective quotes, and biography to support event programming, promotional
+                  materials, and digital engagement. It's an honor to join peers committed to shaping the next chapter
+                  in health and medicine.
                 </p>
                 <p>
-                  Please feel free to reach out for additional materials or to discuss potential collaboration
-                  opportunities.
+                  Please feel free to reach out if additional materials or collaboration opportunities arise in the
+                  lead-up to the event.
                 </p>
                 <p className="text-right">— Dr. Asif Ali, MD</p>
               </AccordionContent>
@@ -252,28 +263,23 @@ export default function MediaKitPage() {
 
             <AccordionItem value="final-notes" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
               <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
-                Additional Information
+                Final Notes
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-6 pt-0">
                 <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
-                  <p>
-                    This media kit provides comprehensive information for speaking engagements, media appearances, and
-                    professional collaborations.
-                  </p>
+                  <p>This package includes the finalized speaker profile and quotes for Medfuel event coordination.</p>
 
                   <div>
-                    <p className="mb-2">Available materials include:</p>
+                    <p className="mb-2">Pending inclusion:</p>
                     <ul className="list-disc pl-5 space-y-1">
-                      <li>High-resolution professional headshot</li>
-                      <li>Detailed biography and credentials</li>
-                      <li>Curated quotes on key topics</li>
-                      <li>Speaking topics and expertise areas</li>
+                      <li>High-resolution headshot (included)</li>
+                      <li>Confirmation of ticketing support (to be clarified)</li>
                     </ul>
                   </div>
 
                   <p>
-                    For additional information, custom materials, or to discuss speaking opportunities, please don't
-                    hesitate to reach out through the contact information provided.
+                    Thank you again for the invitation. I look forward to being part of the conversation and
+                    contributing to Medfuel's impact in health innovation.
                   </p>
                 </div>
               </AccordionContent>
@@ -325,6 +331,17 @@ export default function MediaKitPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-6 flex flex-wrap items-center justify-start gap-4 md:gap-6">
+                    {/* Medfuel Logo */}
+                    <div className="relative h-10 w-36">
+                      <Image
+                        src="/images/logos/medfuel-logo.png"
+                        alt="Medfuel Logo"
+                        layout="fill"
+                        objectFit="contain"
+                        className="dark:brightness-0 dark:invert"
+                      />
+                    </div>
+
                     {/* Houston Cardiology Consultants Logo */}
                     <div className="relative h-12 w-32">
                       <Image
@@ -355,14 +372,14 @@ export default function MediaKitPage() {
                   </div>
                   <div className="space-y-4 text-slate-700 dark:text-slate-300">
                     <p>
-                      Thank you for your interest in my work and expertise. This media kit contains my professional
-                      profile, perspective quotes, and biography to support speaking engagements, media interviews, and
-                      collaborative opportunities. I'm honored to share insights on the intersection of clinical
-                      medicine, digital health innovation, and patient-centered care.
+                      Thank you for the opportunity to participate in Medfuel 2025. This media folder contains my
+                      official speaker profile, perspective quotes, and biography to support event programming,
+                      promotional materials, and digital engagement. It's an honor to join peers committed to shaping
+                      the next chapter in health and medicine.
                     </p>
                     <p>
-                      Please feel free to reach out for additional materials or to discuss potential collaboration
-                      opportunities.
+                      Please feel free to reach out if additional materials or collaboration opportunities arise in the
+                      lead-up to the event.
                     </p>
                     <p className="text-right">— Dr. Asif Ali, MD</p>
                   </div>
@@ -406,33 +423,28 @@ export default function MediaKitPage() {
                 </CardContent>
               </Card>
 
-              {/* Additional Information Card */}
+              {/* Final Notes Card */}
               <Card className="shadow-sm bg-card border dark:border-slate-700">
                 <CardHeader>
-                  <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200">
-                    Additional Information
-                  </CardTitle>
+                  <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200">Final Notes</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
                     <p>
-                      This media kit provides comprehensive information for speaking engagements, media appearances, and
-                      professional collaborations.
+                      This package includes the finalized speaker profile and quotes for Medfuel event coordination.
                     </p>
 
                     <div>
-                      <p className="mb-2">Available materials include:</p>
+                      <p className="mb-2">Pending inclusion:</p>
                       <ul className="list-disc pl-5 space-y-1">
-                        <li>High-resolution professional headshot</li>
-                        <li>Detailed biography and credentials</li>
-                        <li>Curated quotes on key topics</li>
-                        <li>Speaking topics and expertise areas</li>
+                        <li>High-resolution headshot (included)</li>
+                        <li>Confirmation of ticketing support (to be clarified)</li>
                       </ul>
                     </div>
 
                     <p>
-                      For additional information, custom materials, or to discuss speaking opportunities, please don't
-                      hesitate to reach out through the contact information provided.
+                      Thank you again for the invitation. I look forward to being part of the conversation and
+                      contributing to Medfuel's impact in health innovation.
                     </p>
                   </div>
                 </CardContent>
