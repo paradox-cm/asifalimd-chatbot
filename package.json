@@ -71,6 +71,7 @@
     "@planetscale/database": "latest",
     "@premai/prem-sdk": "latest",
     "@qdrant/js-client-rest": "latest",
+    "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "latest",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-select": "latest",
