@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog"
 import { DownloadCloud, Expand, X, FileText } from "lucide-react"
 
@@ -45,7 +46,7 @@ export default function MediaKitPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <div className="container mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 sm:py-16 md:py-24">
+      <div className="container mx-auto max-w-4xl xl:max-w-7xl px-4 py-12 sm:px-6 lg:px-8 sm:py-16 md:py-24">
         {/* Hero Section */}
         <section className="text-center mb-16 md:mb-20">
           <div className="relative mx-auto w-32 h-32 md:w-40 md:h-40 mb-6 group">
@@ -122,149 +123,335 @@ export default function MediaKitPage() {
           </DialogContent>
         </Dialog>
 
-        {/* Content Sections */}
-        <Accordion type="multiple" className="w-full space-y-3 md:space-y-4">
-          <AccordionItem value="welcome-note" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
-            <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
-              Welcome Note
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 pt-0">
-              <div className="mb-6 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center sm:justify-center gap-4 sm:gap-6 md:gap-8">
-                {/* Medfuel Logo */}
-                <div className="relative h-10 w-36 sm:h-12 sm:w-44">
-                  <Image
-                    src="/images/logos/medfuel-logo.png"
-                    alt="Medfuel Logo"
-                    layout="fill"
-                    objectFit="contain"
-                    className="dark:brightness-0 dark:invert" // Basic dark mode adjustment
-                  />
-                </div>
-
-                {/* Houston Cardiology Consultants Logo */}
-                <div className="relative h-12 w-32 sm:h-16 sm:w-40">
-                  <Image
-                    src="/images/logos/hcc-light.png"
-                    alt="Houston Cardiology Consultants Logo (Light)"
-                    layout="fill"
-                    objectFit="contain"
-                    className="block dark:hidden"
-                  />
-                  <Image
-                    src="/images/logos/hcc-dark.png"
-                    alt="Houston Cardiology Consultants Logo (Dark)"
-                    layout="fill"
-                    objectFit="contain"
-                    className="hidden dark:block"
-                  />
-                </div>
-
-                {/* The POTS Doc Logo */}
-                <div className="relative h-11 w-11 sm:h-14 sm:w-14">
-                  <Image
-                    src="/images/pots-doc-heart.png" // Using the more specific logo
-                    alt="The POTS Doc Logo"
-                    layout="fill"
-                    objectFit="contain"
-                    // This logo might need a specific dark mode version or filter if it doesn't show well
-                  />
-                </div>
-              </div>
-              <p>
-                Thank you for the opportunity to participate in Medfuel 2025. This media folder contains my official
-                speaker profile, perspective quotes, and biography to support event programming, promotional materials,
-                and digital engagement. It's an honor to join peers committed to shaping the next chapter in health and
-                medicine.
-              </p>
-              <p>
-                Please feel free to reach out if additional materials or collaboration opportunities arise in the
-                lead-up to the event.
-              </p>
-              <p className="text-right">— Dr. Asif Ali, MD</p>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="bio" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
-            <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
-              Bio
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 pt-0">
-              <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
-                <p>
-                  Dr. Asif Ali is a Houston-based cardiologist and nationally recognized leader at the crossroads of
-                  clinical care, digital health, and medical innovation. He serves as a partner at Houston Cardiology
-                  Consultants and is the founder of the Cena Research Institute, where he advances inclusive clinical
-                  trials and validation for emerging technologies.
-                </p>
-
-                <p>
-                  Dr. Ali is a Clinical Assistant Professor at McGovern Medical School and a member of the American
-                  Heart Association's Health Tech Advisory Group, where he co-leads initiatives on AI, remote
-                  monitoring, and virtual care. As a strategic advisor and fractional CMO to over 15 health-tech
-                  ventures, he is known for translating medical rigor into scalable, human-centered solutions.
-                </p>
-
-                <p>
-                  Whether mentoring startups or designing care models, Dr. Ali's work is driven by a simple ethos: Where
-                  evidence meets empathy.
-                </p>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="quotes" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
-            <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
-              Curated Quotes
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 pt-0">
-              <div className="space-y-8">
-                {quotes.map((quote, index) => (
-                  <div
-                    key={index}
-                    className="border-l-4 border-clinical-500 pl-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-r-md"
-                  >
-                    <h4 className="font-semibold text-md text-clinical-700 dark:text-clinical-400 mb-1">
-                      {quote.category}
-                    </h4>
-                    <blockquote className="italic text-slate-700 dark:text-slate-300 text-xl">
-                      "{quote.text}"
-                    </blockquote>
+        {/* Mobile/Tablet Accordion Layout */}
+        <div className="xl:hidden">
+          <Accordion type="multiple" className="w-full space-y-3 md:space-y-4">
+            <AccordionItem value="welcome-note" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
+              <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
+                Welcome Note
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6 pt-0">
+                <div className="mb-6 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center sm:justify-center gap-4 sm:gap-6 md:gap-8">
+                  {/* Medfuel Logo */}
+                  <div className="relative h-10 w-36 sm:h-12 sm:w-44">
+                    <Image
+                      src="/images/logos/medfuel-logo.png"
+                      alt="Medfuel Logo"
+                      layout="fill"
+                      objectFit="contain"
+                      className="dark:brightness-0 dark:invert"
+                    />
                   </div>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
 
-          <AccordionItem value="final-notes" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
-            <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
-              Final Notes
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 pt-0">
-              <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
-                <p>This package includes the finalized speaker profile and quotes for Medfuel event coordination.</p>
+                  {/* Houston Cardiology Consultants Logo */}
+                  <div className="relative h-12 w-32 sm:h-16 sm:w-40">
+                    <Image
+                      src="/images/logos/hcc-light.png"
+                      alt="Houston Cardiology Consultants Logo (Light)"
+                      layout="fill"
+                      objectFit="contain"
+                      className="block dark:hidden"
+                    />
+                    <Image
+                      src="/images/logos/hcc-dark.png"
+                      alt="Houston Cardiology Consultants Logo (Dark)"
+                      layout="fill"
+                      objectFit="contain"
+                      className="hidden dark:block"
+                    />
+                  </div>
 
-                <div>
-                  <p className="mb-2">Pending inclusion:</p>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>High-resolution headshot (included)</li>
-                    <li>Confirmation of ticketing support (to be clarified)</li>
-                  </ul>
+                  {/* The POTS Doc Logo */}
+                  <div className="relative h-11 w-11 sm:h-14 sm:w-14">
+                    <Image src="/images/pots-doc-heart.png" alt="The POTS Doc Logo" layout="fill" objectFit="contain" />
+                  </div>
                 </div>
-
                 <p>
-                  Thank you again for the invitation. I look forward to being part of the conversation and contributing
-                  to Medfuel's impact in health innovation.
+                  Thank you for the opportunity to participate in Medfuel 2025. This media folder contains my official
+                  speaker profile, perspective quotes, and biography to support event programming, promotional
+                  materials, and digital engagement. It's an honor to join peers committed to shaping the next chapter
+                  in health and medicine.
                 </p>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+                <p>
+                  Please feel free to reach out if additional materials or collaboration opportunities arise in the
+                  lead-up to the event.
+                </p>
+                <p className="text-right">— Dr. Asif Ali, MD</p>
+              </AccordionContent>
+            </AccordionItem>
 
-          <AccordionItem value="download-kit" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
-            <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
-              Download Media Kit
-            </AccordionTrigger>
-            <AccordionContent className="px-6 pb-6 pt-0">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <AccordionItem value="bio" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
+              <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
+                Bio
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6 pt-0">
+                <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
+                  <p>
+                    Dr. Asif Ali is a Houston-based cardiologist and nationally recognized leader at the crossroads of
+                    clinical care, digital health, and medical innovation. He serves as a partner at Houston Cardiology
+                    Consultants and is the founder of the Cena Research Institute, where he advances inclusive clinical
+                    trials and validation for emerging technologies.
+                  </p>
+
+                  <p>
+                    Dr. Ali is a Clinical Assistant Professor at McGovern Medical School and a member of the American
+                    Heart Association's Health Tech Advisory Group, where he co-leads initiatives on AI, remote
+                    monitoring, and virtual care. As a strategic advisor and fractional CMO to over 15 health-tech
+                    ventures, he is known for translating medical rigor into scalable, human-centered solutions.
+                  </p>
+
+                  <p>
+                    Whether mentoring startups or designing care models, Dr. Ali's work is driven by a simple ethos:
+                    Where evidence meets empathy.
+                  </p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="quotes" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
+              <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
+                Curated Quotes
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6 pt-0">
+                <div className="space-y-8">
+                  {quotes.map((quote, index) => (
+                    <div
+                      key={index}
+                      className="border-l-4 border-clinical-500 pl-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-r-md"
+                    >
+                      <h4 className="font-semibold text-md text-clinical-700 dark:text-clinical-400 mb-1">
+                        {quote.category}
+                      </h4>
+                      <blockquote className="italic text-slate-700 dark:text-slate-300 text-xl">
+                        "{quote.text}"
+                      </blockquote>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="final-notes" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
+              <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
+                Final Notes
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6 pt-0">
+                <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
+                  <p>This package includes the finalized speaker profile and quotes for Medfuel event coordination.</p>
+
+                  <div>
+                    <p className="mb-2">Pending inclusion:</p>
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>High-resolution headshot (included)</li>
+                      <li>Confirmation of ticketing support (to be clarified)</li>
+                    </ul>
+                  </div>
+
+                  <p>
+                    Thank you again for the invitation. I look forward to being part of the conversation and
+                    contributing to Medfuel's impact in health innovation.
+                  </p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="download-kit" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
+              <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
+                Download Media Kit
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6 pt-0">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Button size="xl" asChild>
+                    <a
+                      href={DROPBOX_PDF_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-6 py-3"
+                    >
+                      <DownloadCloud className="h-5 w-5" />
+                      Download PDF
+                    </a>
+                  </Button>
+                  <Button size="xl" variant="secondary" asChild>
+                    <a
+                      href={GOOGLE_DOCS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-6 py-3"
+                    >
+                      <FileText className="h-5 w-5" />
+                      Open in Google Docs
+                    </a>
+                  </Button>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+
+        {/* Wide Desktop Card Layout */}
+        <div className="hidden xl:block">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
+            {/* Left Column */}
+            <div className="space-y-6">
+              {/* Welcome Note Card */}
+              <Card className="shadow-sm bg-card border dark:border-slate-700">
+                <CardHeader>
+                  <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200">Welcome Note</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="mb-6 flex flex-wrap items-center justify-start gap-4 md:gap-6">
+                    {/* Medfuel Logo */}
+                    <div className="relative h-10 w-36">
+                      <Image
+                        src="/images/logos/medfuel-logo.png"
+                        alt="Medfuel Logo"
+                        layout="fill"
+                        objectFit="contain"
+                        className="dark:brightness-0 dark:invert"
+                      />
+                    </div>
+
+                    {/* Houston Cardiology Consultants Logo */}
+                    <div className="relative h-12 w-32">
+                      <Image
+                        src="/images/logos/hcc-light.png"
+                        alt="Houston Cardiology Consultants Logo (Light)"
+                        layout="fill"
+                        objectFit="contain"
+                        className="block dark:hidden"
+                      />
+                      <Image
+                        src="/images/logos/hcc-dark.png"
+                        alt="Houston Cardiology Consultants Logo (Dark)"
+                        layout="fill"
+                        objectFit="contain"
+                        className="hidden dark:block"
+                      />
+                    </div>
+
+                    {/* The POTS Doc Logo */}
+                    <div className="relative h-11 w-11">
+                      <Image
+                        src="/images/pots-doc-heart.png"
+                        alt="The POTS Doc Logo"
+                        layout="fill"
+                        objectFit="contain"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-4 text-slate-700 dark:text-slate-300">
+                    <p>
+                      Thank you for the opportunity to participate in Medfuel 2025. This media folder contains my
+                      official speaker profile, perspective quotes, and biography to support event programming,
+                      promotional materials, and digital engagement. It's an honor to join peers committed to shaping
+                      the next chapter in health and medicine.
+                    </p>
+                    <p>
+                      Please feel free to reach out if additional materials or collaboration opportunities arise in the
+                      lead-up to the event.
+                    </p>
+                    <p className="text-right">— Dr. Asif Ali, MD</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Bio Card */}
+              <Card className="shadow-sm bg-card border dark:border-slate-700">
+                <CardHeader>
+                  <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200">Bio</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
+                    <p>
+                      Dr. Asif Ali is a Houston-based cardiologist and nationally recognized leader at the crossroads of
+                      clinical care, digital health, and medical innovation. He serves as a partner at Houston
+                      Cardiology Consultants and is the founder of the Cena Research Institute, where he advances
+                      inclusive clinical trials and validation for emerging technologies.
+                    </p>
+
+                    <p>
+                      Dr. Ali is a Clinical Assistant Professor at McGovern Medical School and a member of the American
+                      Heart Association's Health Tech Advisory Group, where he co-leads initiatives on AI, remote
+                      monitoring, and virtual care. As a strategic advisor and fractional CMO to over 15 health-tech
+                      ventures, he is known for translating medical rigor into scalable, human-centered solutions.
+                    </p>
+
+                    <p>
+                      Whether mentoring startups or designing care models, Dr. Ali's work is driven by a simple ethos:
+                      Where evidence meets empathy.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-6">
+              {/* Curated Quotes Card */}
+              <Card className="shadow-sm bg-card border dark:border-slate-700">
+                <CardHeader>
+                  <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200">
+                    Curated Quotes
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {quotes.map((quote, index) => (
+                      <div
+                        key={index}
+                        className="border-l-4 border-clinical-500 pl-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-r-md"
+                      >
+                        <h4 className="font-semibold text-sm text-clinical-700 dark:text-clinical-400 mb-1">
+                          {quote.category}
+                        </h4>
+                        <blockquote className="italic text-slate-700 dark:text-slate-300 text-lg">
+                          "{quote.text}"
+                        </blockquote>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Final Notes Card */}
+              <Card className="shadow-sm bg-card border dark:border-slate-700">
+                <CardHeader>
+                  <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200">Final Notes</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
+                    <p>
+                      This package includes the finalized speaker profile and quotes for Medfuel event coordination.
+                    </p>
+
+                    <div>
+                      <p className="mb-2">Pending inclusion:</p>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li>High-resolution headshot (included)</li>
+                        <li>Confirmation of ticketing support (to be clarified)</li>
+                      </ul>
+                    </div>
+
+                    <p>
+                      Thank you again for the invitation. I look forward to being part of the conversation and
+                      contributing to Medfuel's impact in health innovation.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Download Section for Desktop */}
+          <Card className="shadow-sm bg-card border dark:border-slate-700">
+            <CardHeader>
+              <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200 text-center">
+                Download Media Kit
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-row gap-6 justify-center items-center">
                 <Button size="xl" asChild>
                   <a
                     href={DROPBOX_PDF_URL}
@@ -288,9 +475,9 @@ export default function MediaKitPage() {
                   </a>
                 </Button>
               </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )
