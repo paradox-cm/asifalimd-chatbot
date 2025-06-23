@@ -37,7 +37,7 @@ const quotes: QuoteItem[] = [
 ]
 
 const DROPBOX_PDF_URL =
-  "https://www.dropbox.com/scl/fi/jvucpci1tgrt76qxlwrge/Dr_Asif_Ali_Medfuel_Speaker_Media_Kit_Printable.pdf?rlkey=tbtlpgwgpy4vgrm3km2jiuian&dl=0"
+  "https://www.dropbox.com/scl/fi/b79773k8an5nibj233yw0/Dr_Asif_Ali_Medfuel_Speaker_Media_Kit_Printable.pdf?rlkey=hleyw62wu6xlq55dp3mkhfrbg&dl=0"
 const GOOGLE_DOCS_URL =
   "https://docs.google.com/document/d/1Bt52r3XxWOJ4wZ2J-Tm3iv8zUxWxiB44I3I3B6FA2XU/edit?usp=sharing"
 
