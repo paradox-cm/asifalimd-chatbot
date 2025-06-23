@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog"
-import { DownloadCloud, Quote, Expand, X, FileText } from "lucide-react"
+import { DownloadCloud, Expand, X, FileText } from "lucide-react"
 
 interface QuoteItem {
   category: string
@@ -227,9 +227,7 @@ export default function MediaKitPage() {
                       {quote.category}
                     </h4>
                     <blockquote className="italic text-slate-700 dark:text-slate-300 text-xl">
-                      <Quote className="inline-block h-5 w-5 mr-1 -mt-1 text-clinical-500" />
-                      {quote.text}
-                      <Quote className="inline-block h-5 w-5 ml-1 -mt-1 transform scale-x-[-1] text-clinical-500" />
+                      "{quote.text}"
                     </blockquote>
                   </div>
                 ))}
