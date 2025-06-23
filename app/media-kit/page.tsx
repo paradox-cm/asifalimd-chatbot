@@ -266,14 +266,24 @@ export default function MediaKitPage() {
             <AccordionContent className="px-6 pb-6 pt-0">
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="xl" asChild>
-                  <a href={DROPBOX_PDF_URL} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                    <DownloadCloud className="mr-2 h-5 w-5" />
+                  <a
+                    href={DROPBOX_PDF_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3"
+                  >
+                    <DownloadCloud className="h-5 w-5" />
                     Download PDF
                   </a>
                 </Button>
                 <Button size="xl" variant="secondary" asChild>
-                  <a href={GOOGLE_DOCS_URL} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                    <FileText className="mr-2 h-5 w-5" />
+                  <a
+                    href={GOOGLE_DOCS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3"
+                  >
+                    <FileText className="h-5 w-5" />
                     Open in Google Docs
                   </a>
                 </Button>
