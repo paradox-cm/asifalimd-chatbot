@@ -196,6 +196,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             >
               Close Menu
             </button>
+            <Link
+              href="/media-kit"
+              className="mt-2 w-full py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-clinical-600 dark:hover:text-clinical-400 transition-colors duration-300 flex items-center justify-center"
+              onClick={onClose}
+            >
+              Media Kit
+            </Link>
           </div>
         </div>
       </div>
