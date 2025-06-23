@@ -54,7 +54,7 @@ export default function MediaKitPage() {
               onClick={() => setIsImageOpen(true)}
             >
               <Image
-                src="/images/dr-ali-new-headshot.png"
+                src="/images/dr-ali-high-res-headshot.png"
                 alt="Dr. Asif Ali Headshot"
                 layout="fill"
                 objectFit="cover"
@@ -99,7 +99,7 @@ export default function MediaKitPage() {
             </DialogClose>
             <div className="relative w-full h-[600px]">
               <Image
-                src="/images/dr-ali-new-headshot.png"
+                src="/images/dr-ali-high-res-headshot.png"
                 alt="Dr. Asif Ali Headshot - Full Size"
                 layout="fill"
                 objectFit="contain"
@@ -110,8 +110,8 @@ export default function MediaKitPage() {
             <div className="flex justify-center mt-4 pb-4">
               <Button asChild variant="secondary" size="sm">
                 <a
-                  href="/images/dr-ali-new-headshot.png"
-                  download="Dr_Asif_Ali_Headshot.png"
+                  href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Dr-Asf-Ali-f1ZcxVUg6IQPq0ueRzzk2ZIA27wZyA.png"
+                  download="Dr_Asif_Ali_High_Res_Headshot.png"
                   className="flex items-center gap-2"
                 >
                   <DownloadCloud className="h-4 w-4" />
