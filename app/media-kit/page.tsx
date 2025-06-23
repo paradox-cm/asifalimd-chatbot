@@ -44,6 +44,57 @@ const GOOGLE_DOCS_URL =
 export default function MediaKitPage() {
   const [isImageOpen, setIsImageOpen] = useState(false)
 
+  const bioContent = (
+    <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
+      <p>
+        Dr. Asif Ali is a Houston-based cardiologist and nationally recognized leader at the crossroads of clinical
+        care, digital health, and medical innovation. He serves as a partner at Houston Cardiology Consultants and is
+        the founder of the Cena Research Institute, where he advances inclusive clinical trials and validation for
+        emerging technologies.
+      </p>
+
+      <p>
+        Dr. Ali is a Clinical Assistant Professor at McGovern Medical School and a member of the American Heart
+        Association's Health Tech Advisory Group, where he co-leads initiatives on AI, remote monitoring, and virtual
+        care. As a strategic advisor and fractional CMO to over 15 health-tech ventures, he is known for translating
+        medical rigor into scalable, human-centered solutions.
+      </p>
+
+      <p>
+        Whether mentoring startups or designing care models, Dr. Ali's work is driven by a simple ethos: Where evidence
+        meets empathy.
+      </p>
+
+      <div className="mt-6">
+        <h3 className="text-lg font-semibold text-charcoal dark:text-slate-200 mb-3">Education & Medical Training</h3>
+        <ul className="space-y-2 text-slate-700 dark:text-slate-300">
+          <li>
+            <strong>M.D., Cardiovascular Medicine</strong>
+            <br />
+            McGovern Medical School at UTHealth, Houston
+            <br />
+            Fellowship in Cardiology and Advanced Cardiovascular Imaging
+          </li>
+          <li>
+            <strong>M.P.H., Public Health</strong>
+            <br />
+            UTHealth School of Public Health, Houston
+          </li>
+          <li>
+            <strong>B.S., Biology</strong>
+            <br />
+            Trinity University, San Antonio
+          </li>
+          <li>
+            <strong>Residency, Internal Medicine</strong>
+            <br />
+            McGovern Medical School at UTHealth, Houston
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+
   return (
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-4xl xl:max-w-7xl px-4 py-12 sm:px-6 lg:px-8 sm:py-16 md:py-24">
@@ -184,28 +235,7 @@ export default function MediaKitPage() {
               <AccordionTrigger className="text-xl font-medium px-6 py-4 hover:no-underline text-charcoal dark:text-slate-200">
                 Bio
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-6 pt-0">
-                <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
-                  <p>
-                    Dr. Asif Ali is a Houston-based cardiologist and nationally recognized leader at the crossroads of
-                    clinical care, digital health, and medical innovation. He serves as a partner at Houston Cardiology
-                    Consultants and is the founder of the Cena Research Institute, where he advances inclusive clinical
-                    trials and validation for emerging technologies.
-                  </p>
-
-                  <p>
-                    Dr. Ali is a Clinical Assistant Professor at McGovern Medical School and a member of the American
-                    Heart Association's Health Tech Advisory Group, where he co-leads initiatives on AI, remote
-                    monitoring, and virtual care. As a strategic advisor and fractional CMO to over 15 health-tech
-                    ventures, he is known for translating medical rigor into scalable, human-centered solutions.
-                  </p>
-
-                  <p>
-                    Whether mentoring startups or designing care models, Dr. Ali's work is driven by a simple ethos:
-                    Where evidence meets empathy.
-                  </p>
-                </div>
-              </AccordionContent>
+              <AccordionContent className="px-6 pb-6 pt-0">{bioContent}</AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="quotes" className="border dark:border-slate-700 rounded-lg shadow-sm bg-card">
@@ -361,28 +391,7 @@ export default function MediaKitPage() {
                 <CardHeader>
                   <CardTitle className="text-xl font-medium text-charcoal dark:text-slate-200">Bio</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="prose prose-lg dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4">
-                    <p>
-                      Dr. Asif Ali is a Houston-based cardiologist and nationally recognized leader at the crossroads of
-                      clinical care, digital health, and medical innovation. He serves as a partner at Houston
-                      Cardiology Consultants and is the founder of the Cena Research Institute, where he advances
-                      inclusive clinical trials and validation for emerging technologies.
-                    </p>
-
-                    <p>
-                      Dr. Ali is a Clinical Assistant Professor at McGovern Medical School and a member of the American
-                      Heart Association's Health Tech Advisory Group, where he co-leads initiatives on AI, remote
-                      monitoring, and virtual care. As a strategic advisor and fractional CMO to over 15 health-tech
-                      ventures, he is known for translating medical rigor into scalable, human-centered solutions.
-                    </p>
-
-                    <p>
-                      Whether mentoring startups or designing care models, Dr. Ali's work is driven by a simple ethos:
-                      Where evidence meets empathy.
-                    </p>
-                  </div>
-                </CardContent>
+                <CardContent>{bioContent}</CardContent>
               </Card>
             </div>
 
