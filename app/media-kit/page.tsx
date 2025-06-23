@@ -78,9 +78,14 @@ export default function MediaKitPage() {
             Cardiologist | Clinical Innovator | Med-Tech Strategist
           </p>
           <Button size="lg" asChild>
-            <a href={DROPBOX_PDF_URL} target="_blank" rel="noopener noreferrer">
-              <DownloadCloud className="mr-2 h-5 w-5" />
-              Download Full Kit as PDF
+            <a
+              href={DROPBOX_PDF_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2"
+            >
+              <DownloadCloud className="h-5 w-5" />
+              Download Media Kit PDF
             </a>
           </Button>
         </section>
